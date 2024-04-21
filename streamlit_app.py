@@ -10,7 +10,7 @@ st.write(
 )
 
 # new section addedd to call the API
-fruiyvice_response=rt.get("https://fruityvice.com/api/fruit/watermelon")
+
 #st.text(fruiyvice_response.json())
 
 name_on_order=st.text_input('Name of Smoothie')
@@ -20,7 +20,7 @@ session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 #st.dataframe(data=my_dataframe, use_container_width=True)
 ingrediants_list=st.multiselect('Choose up to 5 ingrediants:', my_dataframe, max_selections=5)
-fv_df=st.dataframe(data=fruiyvice_response.json(),use_container_width=True)
+
 
 if ingrediants_list:
 # st.write(ingrediants_list)
@@ -28,7 +28,10 @@ if ingrediants_list:
  ingredients_string=''
  for fruit_choosen in ingrediants_list:
      ingredients_string +=fruit_choosen +' '
-
+     st.subheader(fruit_choosen+' Nutritional Information')
+     fruiyvice_response=rt.get("https://fruityvice.com/api/fruit/"+fruit_choosen)
+     fv_df=st.dataframe(data=fruiyvice_response.json(),use_container_width=True)
+     
  #st.write(ingredients_string)
 
  my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
