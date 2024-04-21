@@ -1,6 +1,7 @@
 # Import python packages
 import streamlit as st
 from snowflake.snowpark.functions import col
+import requests
 
 # Write directly to the app
 st.title("Customize Your Smoothi")
@@ -8,6 +9,9 @@ st.write(
     "Choose the fruits you want into your smoothie"
 )
 
+# new section addedd to call the API
+fruiyvice_response=rt.get("https://fruityvice.com/api/fruit/watermelon")
+st.text(fruiyvice_response.json())
 
 name_on_order=st.text_input('Name of Smoothie')
 st.write('The Name Of Your Smoothie will be:- ',name_on_order)
