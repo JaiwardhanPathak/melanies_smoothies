@@ -1,7 +1,7 @@
 # Import python packages
 import streamlit as st
 from snowflake.snowpark.functions import col
-import requests
+import requests as rt
 
 # Write directly to the app
 st.title("Customize Your Smoothi")
